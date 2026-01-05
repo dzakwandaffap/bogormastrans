@@ -78,7 +78,7 @@
 </template>
 
 <script setup>
-import Navbar from '../components/Navbar.vue'
+import Navbar from '../layouts/Navbar.vue'
 import { openWhatsAppBooking } from '../services/whatsapp'
 
 const ADMIN_WA = '6287796720488'
