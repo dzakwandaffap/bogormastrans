@@ -1,68 +1,84 @@
 ﻿<template>
-  <header :class="['fixed inset-x-0 top-0 z-50 transition-all duration-300', scrolled ? 'bg-white/90 shadow-lg backdrop-blur-md' : 'bg-white/70 backdrop-blur']">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10flex items-center justify-center text-xl"><img src="https://drive.google.com/file/d/1D9JUSFxoV_T8X0CLtBtOU-4wMMNtxDhw/view" alt=""> </div>
-          <div class="leading-tight">
-            <p class="text-lg font-bold text-gray-900">Bogor Mas Trans</p>
-            <p class="hidden sm:block text-xs text-gray-500">Premium rental service</p>
+  <header
+    :class="[
+      'fixed inset-x-0 top-0 z-50 transition-all duration-300',
+      scrolled ? 'bg-white/95 shadow-md backdrop-blur border-b border-slate-200' : 'bg-white/70 backdrop-blur'
+    ]"
+  >
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <!-- Brand -->
+        <button
+          type="button"
+          class="flex items-center gap-3 text-left"
+          @click="scrollTo('home')"
+          aria-label="Go to Home"
+        >
+          <div class="h-10 w-10 rounded-xl bg-white ring-1 ring-slate-200 grid place-items-center overflow-hidden">
+            <img
+              :src="logoSrc"
+              alt="Bogor Mas Trans"
+              class="h-full w-full object-contain p-1"
+              loading="lazy"
+              @error="onLogoError"
+            />
           </div>
-        </div>
 
+          <div class="leading-tight">
+            <p class="text-[15px] sm:text-base font-extrabold tracking-tight text-slate-900">
+              Bogor Mas Trans
+            </p>
+            <p class="hidden sm:block text-xs font-semibold text-slate-500">
+              rental mobil bogor terpercaya 
+            </p>
+          </div>
+        </button>
+
+        <!-- Desktop nav -->
         <nav class="hidden lg:flex items-center gap-8">
           <button
             v-for="link in links"
             :key="link.id"
             type="button"
             @click="scrollTo(link.id)"
-            class="text-gray-600 hover:text-black font-medium transition-colors"
+            class="text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors"
           >
             {{ link.label }}
           </button>
         </nav>
 
-        <div class="hidden lg:flex items-center gap-4">
+        <!-- Desktop CTA -->
+        <div class="hidden lg:flex items-center gap-3">
           <button
             type="button"
             @click="emit('book')"
-            class="px-4 py-2 bg-black text-[#FFFDE1] rounded-full text-sm font-semibold shadow-sm hover:bg-gray-900 transition"
+            class="inline-flex items-center justify-center rounded-xl bg-slate-900 px-5 py-2.5 text-sm font-extrabold text-white hover:bg-slate-950 transition"
           >
             Book Now
           </button>
         </div>
 
-        <div class="flex items-center gap-3 lg:hidden">
+        <!-- Mobile actions -->
+        <div class="flex items-center gap-2 lg:hidden">
           <button
             type="button"
             @click="emit('book')"
-            class="px-3 py-2 rounded-full bg-black text-[#FFFDE1] text-sm font-semibold hover:bg-gray-900 transition"
+            class="rounded-xl bg-slate-900 px-3 py-2 text-sm font-extrabold text-white hover:bg-slate-950 transition"
           >
             Book
           </button>
+
           <button
             type="button"
             @click="toggleMobileMenu"
-            class="p-2 rounded-lg hover:bg-gray-100 text-gray-800 transition focus:outline-none focus:ring-2 focus:ring-gray-300"
+            class="grid h-10 w-10 place-items-center rounded-xl ring-1 ring-slate-200 bg-white hover:bg-slate-50 transition"
+            :aria-expanded="mobileMenuOpen ? 'true' : 'false'"
+            aria-label="Toggle menu"
           >
-            <svg
-              v-if="!mobileMenuOpen"
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
+            <svg v-if="!mobileMenuOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
-            <svg
-              v-else
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
+            <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 6l12 12M6 18L18 6" />
             </svg>
           </button>
@@ -70,6 +86,7 @@
       </div>
     </div>
 
+    <!-- Mobile drawer -->
     <transition
       enter-active-class="transition-opacity duration-200"
       enter-from-class="opacity-0"
@@ -78,62 +95,68 @@
       leave-from-class="opacity-100"
       leave-to-class="opacity-0"
     >
-      <div v-if="mobileMenuOpen" class="fixed inset-0 z-40 lg:hidden">
-        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" @click="closeMobileMenu"></div>
+      <div v-if="mobileMenuOpen" class="fixed inset-0 z-[60] lg:hidden">
+        <div class="absolute inset-0 bg-black/45" @click="closeMobileMenu"></div>
+
         <transition
-          enter-active-class="transform transition duration-300"
+          enter-active-class="transform transition duration-300 ease-out"
           enter-from-class="-translate-x-full"
           enter-to-class="translate-x-0"
-          leave-active-class="transform transition duration-300"
+          leave-active-class="transform transition duration-250 ease-in"
           leave-from-class="translate-x-0"
           leave-to-class="-translate-x-full"
         >
-          <aside v-if="mobileMenuOpen" class="absolute top-0 left-0 h-full w-72 bg-white shadow-2xl p-6">
-            <div class="flex items-center justify-between mb-10">
+          <aside
+            v-if="mobileMenuOpen"
+            class="absolute left-0 top-0 h-full w-[82%] max-w-xs bg-white shadow-2xl"
+          >
+            <div class="p-5 border-b border-slate-200 flex items-center justify-between">
               <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-black text-[#FFFDE1] rounded-xl flex items-center justify-center font-black text-xl">B</div>
+                <div class="h-10 w-10 rounded-xl bg-white ring-1 ring-slate-200 grid place-items-center overflow-hidden">
+                  <img :src="logoSrc" alt="Bogor Mas Trans" class="h-full w-full object-contain p-1" @error="onLogoError" />
+                </div>
                 <div class="leading-tight">
-                  <p class="text-base font-bold text-gray-900">Bogor Mas Trans</p>
-                  <p class="text-xs text-gray-500">Premium rental</p>
+                  <p class="text-sm font-extrabold text-slate-900">Bogor Mas Trans</p>
+                  <p class="text-xs font-semibold text-slate-500">Premium rental</p>
                 </div>
               </div>
+
               <button
                 type="button"
                 @click="closeMobileMenu"
-                class="p-2 rounded-lg hover:bg-gray-100 text-gray-800 transition focus:outline-none focus:ring-2 focus:ring-gray-300"
+                class="grid h-10 w-10 place-items-center rounded-xl ring-1 ring-slate-200 bg-white hover:bg-slate-50 transition"
+                aria-label="Close menu"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-5 w-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 6l12 12M6 18L18 6" />
                 </svg>
               </button>
             </div>
 
-            <nav class="space-y-2">
-              <button
-                v-for="link in links"
-                :key="link.id"
-                type="button"
-                class="w-full text-left px-4 py-3 rounded-lg text-gray-700 font-medium hover:bg-gray-100 transition"
-                @click="scrollToMobile(link.id)"
-              >
-                {{ link.label }}
-              </button>
-            </nav>
+            <div class="p-5">
+              <nav class="space-y-1">
+                <button
+                  v-for="link in links"
+                  :key="link.id"
+                  type="button"
+                  class="w-full text-left rounded-xl px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition"
+                  @click="scrollToMobile(link.id)"
+                >
+                  {{ link.label }}
+                </button>
+              </nav>
 
-            <div class="mt-10">
               <button
                 type="button"
                 @click="handleBookMobile"
-                class="w-full px-4 py-3 bg-black text-[#FFFDE1] rounded-full font-semibold hover:bg-gray-900 transition shadow-sm"
+                class="mt-6 w-full rounded-xl bg-slate-900 px-4 py-3 text-sm font-extrabold text-white hover:bg-slate-950 transition"
               >
                 Book Now
               </button>
+
+              <p class="mt-3 text-xs font-semibold text-slate-500">
+                Chat admin via WhatsApp untuk cek ketersediaan.
+              </p>
             </div>
           </aside>
         </transition>
@@ -144,6 +167,7 @@
 
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from 'vue'
+import logoPng from '@/assets/logo.png' // pastikan file ini ada
 
 const emit = defineEmits(['book'])
 
@@ -157,6 +181,18 @@ const links = [
   { id: 'contact', label: 'Contact' }
 ]
 
+const logoSrc = ref(logoPng)
+
+function onLogoError() {
+  // fallback kalau logo bermasalah
+  logoSrc.value =
+    'data:image/svg+xml;utf8,' +
+    encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40">
+      <rect width="40" height="40" rx="12" fill="#0f172a"/>
+      <text x="20" y="26" text-anchor="middle" font-size="18" fill="white" font-family="Arial" font-weight="700">B</text>
+    </svg>`)
+}
+
 function toggleMobileMenu() {
   mobileMenuOpen.value = !mobileMenuOpen.value
 }
@@ -166,15 +202,14 @@ function closeMobileMenu() {
 }
 
 function scrollTo(id) {
-  const element = document.getElementById(id)
-  if (element) {
-    element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
+  const el = document.getElementById(id)
+  if (!el) return
+  el.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
 
 function scrollToMobile(id) {
   closeMobileMenu()
-  setTimeout(() => scrollTo(id), 200)
+  setTimeout(() => scrollTo(id), 120)
 }
 
 function handleBookMobile() {
@@ -188,7 +223,7 @@ function handleScroll() {
 
 onMounted(() => {
   handleScroll()
-  window.addEventListener('scroll', handleScroll)
+  window.addEventListener('scroll', handleScroll, { passive: true })
 })
 
 onBeforeUnmount(() => {
