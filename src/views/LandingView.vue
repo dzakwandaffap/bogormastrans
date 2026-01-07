@@ -11,7 +11,7 @@
       <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
         <div class="max-w-3xl">
           <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">
-            Premium car<br />rental
+            Bogormastrans<br />Rental Mobil
           </h1>
           <p class="text-lg sm:text-xl text-gray-300 mb-12 max-w-2xl">
             Experience luxury and comfort with our premium fleet. Quality vehicles, exceptional service.
