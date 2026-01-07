@@ -11,7 +11,6 @@ concurrency:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -29,13 +28,18 @@ jobs:
         run: npm run build
 
       - name: Upload dist to hosting (public_html)
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASS }}
+
           protocol: ftps
           port: 21
+          security: loose
+          timeout: 120000
+          log-level: verbose
+
           local-dir: dist/
           server-dir: public_html/
           dangerous-clean-slate: false
