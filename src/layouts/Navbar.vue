@@ -167,7 +167,7 @@
 
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from 'vue'
-import logoPng from '@/assets/logo.webp' 
+import logoPng from '@/assets/bogormastrans.webp' 
 
 const emit = defineEmits(['book'])
 
