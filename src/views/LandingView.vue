@@ -4,66 +4,93 @@
     <Navbar @book="contactSupport" />
 
     <!-- HERO SECTION -->
-    <section
-      id="home"
-      class="pt-16 lg:pt-[4rem] min-h-screen flex items-center bg-gradient-to-br from-gray-500 via-black to-gray-900 relative overflow-hidden"
-    >
+ <section
+  id="home"
+  class="pt-16 lg:pt-[4rem] min-h-screen flex items-center relative overflow-hidden"
+  :style="{
+    backgroundImage: `url(${heroBg})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat'
+  }"
+>
+
+  <!-- Overlay (biar teks/card kebaca) -->
+  <div class="absolute inset-0 bg-slate-900/65"></div>
+
+    <!-- Optional: overlay gradient agar lebih premium -->
+  <div class="absolute inset-0 bg-gradient-to-br from-black/40 via-slate-900/50 to-black/70"></div>
 
       <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
         <div class="max-w-3xl">
-          <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">
-            BogorMasTrans
+          <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight mb-12">
+            Rental Mobil Murah & Terpercaya Di Bogor 
           </h1>
           <p class="text-lg sm:text-xl text-gray-300 mb-12 max-w-2xl">
-            Trusted Car For Trusted Journeys.
+           <b> Trusted Car For Trusted Journeys.</b>
           </p>
 
           <!-- SEARCH CARD -->
-          <div class="bg-white/95 backdrop-blur-sm rounded-2xl p-6 sm:p-8 shadow-2xl max-w-4xl">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
-              <a href="https://maps.app.goo.gl/nuDQo6er6w5PRZP86">
-                <label class="block text-xs font-bold text-gray-600 mb-2">LOCATION</label>
-                <div class="relative">
-                  <img src="https://tse3.mm.bing.net/th/id/OIP.Nu6jj0CCrG5RDvb_qyypzAHaHa?rs=1&pid=ImgDetMain&a=7&rm=3" alt="Icon" class="absolute inset-y-1/2 left-3 w-6 h-6 transform -translate-y-1/2">
-                  <div
-                    class="w-full pl-10 pr-3 py-3 rounded-lg border border-gray-200 text-sm text-gray-900 bg-white"
-                  >
-                    Royal Tajur Bogor
-                  </div>
-                </div>
-              </a>
+      <div class="bg-white/95 backdrop-blur-sm rounded-2xl p-6 sm:p-8 shadow-2xl max-w-4xl">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
 
-              <a :href="whatsAppUrl">
-                <label class="block text-xs font-bold text-gray-600 mb-2">CONTACT</label>
-                  <div class="relative">
-                  <img src="
-                  data:image/webp;base64,UklGRoAEAABXRUJQVlA4IHQEAADQJgCdASoFAQUBPp1OoUylpKMiJLW4CLATiWlu4XHhG/N18PdhH+osjH4BiKHFDgJV3Ouf0/i1+nPYJ8oz13fuB7JH7ABtgIF2TsnZOydk7J2TsnZOydk7J2TsnZOxhFj/rBGQ/wNQlQ0YJgJASAkAuz130/VPkBN6VIF2TsnYtR1M0OFZu82vTQMxhi612AsDSjOd9XGGLNflxLg6O6sSFNvvFwGaq2S4lxLiWdv0avwI5BvRx0lmkdtpkZcEaR4kMES6mnVgo1u759Cps/3FTCoSkszGGMJzCUsmSXDNbKyXDqWxiQuo+i0GvRUy4jqYkxJdOawmKQSos4CGusyvzIyYkxJh5R+6JXl3d31qkp1yu7QsXEuJcS4P6EzVVpGMe43KokxJiTEmJMSYkxJiTEmJMSYkxJiTEmJMSXIAAP7+jIAAaZ7oYvRatYSvul0YIsdqrwupnPis4DdQz8y2gQ/F9Gf+uMtBJe46Z2h2O0bzWUxZXEnn9nBrDwPfET+6WvcMyqI4nHBaHBzh6n7OBuk3htxwgNNqJ9d5omPQ/v1GfbYwXyux09QkBSW9oM/YgK/G8Ibp1zT7tmgbDB102IDEQax/8s10T93ayiJIkKOB7pUbl/4mhfzjvHl+wrnR+ojUwns3euZTrHirfJFrktkbfYt+Keygb8RCXUKfykLl7Jba1IzhnXL7u4OU1yKDGMJ9xGe+FbSRN2Tg/CF0MgFUAFXeomtRWyZnhYL5lfT/UoBcHV2unELiu6rPv7Bp506ZsUH9O9dCIY526SmEEZ92D21SpSK4KCDwb62ESRx1g7d5jyxcHms2R5//l8lYP0anVM4SNGeDK7Oqus+FsUfInG5L5xC3aRQSMhPMIejwS/hruYCtOhjo31fzImaDhPRJPzPZRuMfGzBkhDX5DxRryW26Lm1YYUW22XqZq+h0rzpf744s+EmX5VghS6aTDkw4J31rozxR3OMirrwQwUFBLzlnSKW2krRln5i88r6NLaisyofMzNtPNpOtTQAqGnBS8WwW7otq+6IQ+P/e/fxC11cnTbOhmYK02o7tDKT/qo3L56i/2CKz7XspohlK0IrfWhdPujbBQSIQl8Db8zSnBXuY3AzjJyjWEhz15lEkmG/S+2pWDwEr5AIttQOz/CR5OxfwAAZ9aZn1Qekk+8/W06oY9KLOhq7fzwYor6ZDvB8mdUMDQH0UnR86tW5A8J0WidUeHUcsUy6NiNGRiq9ffVoUckdKhLjhv/Oq023YO5IHxfTMwMf2+Hs7hc9n0GVTiuFX+gsQpr1HJhbx1xU3w3FAmsAmcWzoyM+yeRilDqtqXeY/Mc7BsKQpyDeUADFAMOm4N7/jJp6HO/xloUtWEJa68ha81kzPVLuF4hmOEK0oG/N5XsWoojlZqrwNj8CbHyOVw03uYzGWClOmIwvuuq+slJ9syUt8vNhYBryTpzh7t/56eez2F8sDj+0Ko7lw8UQ04JHTRLXNH5HqV+TsW4ZVHSYzKvNZKHsFfEAAAAA=" alt="Icon" class="absolute inset-y-1/2 left-3 w-6 h-6 transform -translate-y-1/2">
-                  
-                  <div
-                    class="w-full pl-10 pr-3 py-3 rounded-lg border border-gray-200 text-sm text-gray-900 bg-white"
-                  >
-                    087796720488
-                  </div>
-                </div>
-              </a>
+            <!-- LOCATION -->
+            <a
+              href="https://maps.app.goo.gl/nuDQo6er6w5PRZP86"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="block"
+            >
+              <label class="block text-xs font-bold text-gray-600 mb-2">LOCATION</label>
+              <div class="relative">
+                <i
+                  class="fa-solid fa-location-dot absolute left-3 top-1/2 -translate-y-1/2 text-slate-700 text-lg" style="color: red;"
+                  aria-hidden="true"
+                ></i>
 
-             <button type="button" @click="scrollTo('cars')" class="text-left w-full">
-  <label class="block text-xs font-bold text-gray-600 mb-2">CARS</label>
-  <div class="relative">
-    <img src="https://th.bing.com/th/id/OIP.G9SgUOE2clXMJIpMiOkVvgHaHa?w=203&h=202&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
-         alt="Icon"
-         class="absolute inset-y-1/2 left-3 w-6 h-6 transform -translate-y-1/2" />
-    <div class="w-full pl-10 pr-3 py-3 rounded-lg border border-gray-200 text-sm text-gray-900 bg-white">
-      Pilihan Armada
-    </div>
-  </div>
-</button>
-              
-               
+                <div class="w-full pl-10 pr-3 py-3 rounded-lg border border-gray-200 text-sm text-gray-900 bg-white">
+                  Royal Tajur Bogor
+                </div>
               </div>
+            </a>
 
-            
+            <!-- CONTACT -->
+            <a
+              :href="whatsAppUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="block"
+            >
+              <label class="block text-xs font-bold text-gray-600 mb-2">CONTACT</label>
+              <div class="relative">
+                <i
+                  class="fa-brands fa-whatsapp absolute left-3 top-1/2 -translate-y-1/2 text-green-600 text-lg"
+                  aria-hidden="true"
+                ></i>
+
+                <div class="w-full pl-10 pr-3 py-3 rounded-lg border border-gray-200 text-sm text-gray-900 bg-white">
+                  087796720488
+                </div>
+              </div>
+            </a>
+
+            <!-- CARS -->
+            <button type="button" @click="scrollTo('cars')" class="text-left w-full">
+              <label class="block text-xs font-bold text-gray-600 mb-2">CARS</label>
+              <div class="relative">
+                <i
+                  class="fa-solid fa-car absolute left-3 top-1/2 -translate-y-1/2 text-slate-700 text-lg" style="color: black;"
+                  aria-hidden="true"
+                ></i>
+
+                <div class="w-full pl-10 pr-3 py-3 rounded-lg border border-gray-200 text-sm text-gray-900 bg-white">
+                  Pilihan Armada
+                </div>
+              </div>
+            </button>
+
           </div>
+        </div>
         </div>
       </div>
     </section>
@@ -109,20 +136,23 @@
 </div>
 
 
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-          <div
-            v-for="feature in features"
-            :key="feature.title"
-            class="bg-gray-50 rounded-2xl p-6 border border-gray-100"
-          >
-            <div class="text-3xl mb-4">{{ feature.icon }}</div>
-            <h3 class="font-bold text-gray-900 mb-2">{{ feature.title }}</h3>
-            <p class="text-sm text-gray-600">{{ feature.desc }}</p>
-          </div>
+   <section id="about" class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div
+        v-for="feature in features"
+        :key="feature.title"
+        class="bg-gray-50 rounded-2xl p-6 border border-gray-100 text-center"
+      >
+        <div class="text-3xl mb-4 text-slate-800">
+          <i :class="feature.icon"></i>
         </div>
+        <h3 class="font-bold text-gray-900 mb-2">{{ feature.title }}</h3>
+        <p class="text-sm text-gray-600">{{ feature.desc }}</p>
       </div>
+    </div>
+  </div>
+</section>
     </section>
 
     <!-- PILIHAN ARMADA -->
@@ -156,6 +186,8 @@
               </h3>
 
               <div class="mt-4 grid grid-cols-2 gap-3">
+
+                <!-- DRIVER -->
                 <button
                   type="button"
                   @click="setService(car.id, 'driver')"
@@ -166,9 +198,11 @@
                       : 'border-slate-300 text-slate-700 hover:bg-slate-50'
                   ]"
                 >
-                  👤 Driver
+                  <i class="fa-solid fa-user"></i>
+                  <span>Driver</span>
                 </button>
 
+                <!-- NO DRIVER -->
                 <button
                   type="button"
                   @click="setService(car.id, 'nodriver')"
@@ -179,9 +213,11 @@
                       : 'border-slate-300 text-slate-700 hover:bg-slate-50'
                   ]"
                 >
-                  🚫 No Driver
+                  <i class="fa-solid fa-user-slash"></i>
+                  <span>No Driver</span>
                 </button>
               </div>
+
 
               <!-- TOMBOL DI BAWAH CARD -->
               <button
@@ -261,6 +297,7 @@ import hiacecomuter from '@/assets/cars/hiacecomuter.png'
 import hiacepremio from '@/assets/cars/hiacepremio.png'
 import inovareborn from '@/assets/cars/inovareborn.png'
 import xpander2025 from '@/assets/cars/xpander2025.png'
+import heroBg from '@/assets/cars/background.jpeg'
 
 const router = useRouter()
 const ADMIN_WA = '6287796720488'
@@ -299,10 +336,26 @@ const filteredArmada = computed(() => {
 })
 
 const features = [
-  { icon: '👨', title: 'Driver', desc: 'Driver Pengalaman & Profesional' },
-  { icon: '💰', title: 'Best Price', desc: 'Harga kompetitif' },
-  { icon: '🚗', title: 'Wide Selection', desc: 'Armada lengkap & terawat' },
-  { icon: '⏰', title: '24 JAM', desc: 'Kami Tersedia Selama 24/7/' }
+  {
+    icon: 'fa-solid fa-user',
+    title: 'Driver',
+    desc: 'Tersedia pilihan dengan atau tanpa driver'
+  },
+  {
+    icon: 'fa-solid fa-tags',
+    title: 'Best Price',
+    desc: 'Harga kompetitif'
+  },
+  {
+    icon: 'fa-solid fa-car',
+    title: 'Wide Selection',
+    desc: 'Armada lengkap & terawat'
+  },
+  {
+    icon: 'fa-solid fa-clock-rotate-left',
+    title: '24/7 Service',
+    desc: 'Booking fleksibel'
+  }
 ]
 
 function setService(carId, type) {
