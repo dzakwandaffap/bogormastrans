@@ -12,10 +12,10 @@
       <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
         <div class="max-w-3xl">
           <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">
-            Bogormastrans<br />Rental Mobil
+            BogorMasTrans
           </h1>
           <p class="text-lg sm:text-xl text-gray-300 mb-12 max-w-2xl">
-            Trusted car for trusted journeys.
+            Trusted Car For Trusted Journeys.
           </p>
 
           <!-- SEARCH CARD -->
@@ -54,7 +54,7 @@
          alt="Icon"
          class="absolute inset-y-1/2 left-3 w-6 h-6 transform -translate-y-1/2" />
     <div class="w-full pl-10 pr-3 py-3 rounded-lg border border-gray-200 text-sm text-gray-900 bg-white">
-      Royal Tajur Bogor
+      Pilihan Armada
     </div>
   </div>
 </button>
@@ -63,6 +63,63 @@
               </div>
 
             
+          </div>
+        </div>
+      </div>
+    </section>
+    
+
+
+    
+
+ <!-- FEATURES -->
+    <section id="about" class="py-20 bg-white">
+    <!-- GAMBAR BESAR DI ATAS -->
+    <div class="mb-12 bg-white">
+  <div class="flex flex-col md:flex-row items-center max-w-7xl mx-auto px-4 md:px-26 py-12 gap-24">
+    
+    <!-- IMAGE -->
+    <div class="w-full md:w-[45%] relative flex justify-center items-end">
+      <div class="absolute bottom-0 w-full h-[40%] bg-[#1e4da1] rounded-[50%_50%_0_0] -z-10"></div>
+      
+      <img
+        :src="bannerr"
+        alt="Armada Bogor Mas Trans"
+        class="w-full max-w-[700px] h-auto object-contain relative z-10 scale-110 shadow-xl"
+      />
+    </div>
+
+    <!-- TEXT -->
+    <div class="w-full md:w-[40%] text-left">
+      <h2 class="mb-6 text-3xl md:text-4xl font-extrabold text-gray-900 leading-tight">
+        Layanan Transportasi Terpercaya di Bogor
+      </h2>
+      
+      <p class="text-slate-600 leading-relaxed text-base md:text-sm">
+        Berdiri sejak tahun 2025, Bogor Mas Trans hadir sebagai solusi transportasi terdepan di wilayah Bogor dan sekitarnya. Kami memahami bahwa mobilitas yang efisien adalah kunci produktivitas, itulah sebabnya kami berkomitmen menyediakan layanan rental mobil yang mengutamakan keamanan, kenyamanan, dan profesionalisme.
+
+      </p>
+      <p class="text-slate-600 leading-relaxed text-base md:text-sm">
+      Kami dikelola oleh tenaga profesional yang berdedikasi untuk memberikan pengalaman berkendara terbaik. Dengan armada kendaraan terbaru yang terawat secara berkala, kami siap melayani berbagai kebutuhan transportasi Anda, mulai dari perjalanan bisnis, sewa harian korporat, hingga antar-jemput operasional dengan standar pelayanan prima.
+
+     </p>
+    </div>
+
+  </div>
+</div>
+
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div
+            v-for="feature in features"
+            :key="feature.title"
+            class="bg-gray-50 rounded-2xl p-6 border border-gray-100"
+          >
+            <div class="text-3xl mb-4">{{ feature.icon }}</div>
+            <h3 class="font-bold text-gray-900 mb-2">{{ feature.title }}</h3>
+            <p class="text-sm text-gray-600">{{ feature.desc }}</p>
           </div>
         </div>
       </div>
@@ -140,22 +197,7 @@
       </div>
     </section>
 
-    <!-- FEATURES -->
-    <section id="about" class="py-20 bg-white">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-          <div
-            v-for="feature in features"
-            :key="feature.title"
-            class="bg-gray-50 rounded-2xl p-6 border border-gray-100"
-          >
-            <div class="text-3xl mb-4">{{ feature.icon }}</div>
-            <h3 class="font-bold text-gray-900 mb-2">{{ feature.title }}</h3>
-            <p class="text-sm text-gray-600">{{ feature.desc }}</p>
-          </div>
-        </div>
-      </div>
-    </section>
+  
 
     <!-- FOOTER -->
     <footer id="contact" class="border-t border-gray-200 bg-white py-16">
@@ -164,7 +206,7 @@
           <div>
             <div class="flex items-center gap-3 mb-4">
               <div class="w-36 h-36 flex items-center justify-center">
-                <img src="@/assets/bogormastrans.png" alt="Bogor Mas Trans">
+                <img src="@/assets/logo.png" alt="Bogor Mas Trans">
               </div>
             </div>
             <b><p class="text-sm text-gray-600">Trusted Car For Trusted Journey</p></b>
@@ -213,11 +255,12 @@ import { computed, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import Navbar from '../layouts/Navbar.vue'
 import { openWhatsAppBooking } from '../services/whatsapp'
-
+import bannerr from '@/assets/cars/bannerr.png'
 import avanza2025 from '@/assets/cars/avanza2025.png'
 import hiacecomuter from '@/assets/cars/hiacecomuter.png'
 import hiacepremio from '@/assets/cars/hiacepremio.png'
 import inovareborn from '@/assets/cars/inovareborn.png'
+import xpander2025 from '@/assets/cars/xpander2025.png'
 
 const router = useRouter()
 const ADMIN_WA = '6287796720488'
@@ -241,9 +284,10 @@ const heroImage =
 /** ARMADA 4 MOBIL */
 const armadaCars = [
   { id: 1, name: 'Avanza 2025', image: avanza2025 },
-  { id: 2, name: 'Hiace Comuter', image: hiacecomuter },
+  { id: 2, name: 'Hiace ComMuter', image: hiacecomuter },
   { id: 3, name: 'Hiace Premio', image: hiacepremio },
-  { id: 4, name: 'Innova Reborn', image: inovareborn }
+  { id: 4, name: 'Innova Reborn', image: inovareborn },
+   { id: 5, name: 'Xpander 2025', image: xpander2025 }
 ]
 
 const serviceType = reactive({})
@@ -255,10 +299,10 @@ const filteredArmada = computed(() => {
 })
 
 const features = [
-  { icon: '👨', title: 'Driver', desc: 'Tersedia pilihan dengan atau tanpa driver' },
+  { icon: '👨', title: 'Driver', desc: 'Driver Pengalaman & Profesional' },
   { icon: '💰', title: 'Best Price', desc: 'Harga kompetitif' },
   { icon: '🚗', title: 'Wide Selection', desc: 'Armada lengkap & terawat' },
-  { icon: '📞', title: 'Whatsapp Chat', desc: 'Respons cepat' }
+  { icon: '⏰', title: '24 JAM', desc: 'Kami Tersedia Selama 24/7/' }
 ]
 
 function setService(carId, type) {

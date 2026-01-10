@@ -6,130 +6,46 @@
       scrolled ? 'shadow-md' : ''
     ]"
   >
-    <!-- ===== DESKTOP: TOP INFO BAR (WHITE) ===== -->
-    <div class="desktop-only border-b border-slate-700 bg-white">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="flex h-16 items-center justify-between">
-          <!-- Brand -->
-          <button
-            type="button"
-            class="flex items-center gap-3 text-left"
-            @click="scrollTo('home')"
-            aria-label="Go to Home"
-          >
-            <div class="h-12 w-12 grid place-items-center overflow-hidden">
-              <img
-                :src="logoSrc"
-                alt="Bogor Mas Trans"
-                class="h-full w-full object-contain p-0.5"
-                loading="lazy"
-                @error="onLogoError"
-              />
-            </div>
 
-            <div class="leading-tight">
-              <p class="text-lg font-extrabold tracking-tight text-slate-900 whitespace-nowrap">
-                Bogor Mas Trans
-              </p>
-            </div>
-          </button>
-
-          <!-- Right info: Call + Location -->
-          <div class="flex items-center gap-10">
-            <!-- Call Us (ke WhatsApp) -->
-            <a
-              :href="whatsAppUrl"
-              target="_blank"
-              rel="noopener"
-              class="flex items-start gap-3 group"
-              aria-label="Chat WhatsApp"
-            >
-              <div class="grid h-10 w-10 place-items-center rounded-full bg-white shrink-0">
-                <img
-                  :src="contactIconSrc"
-                  alt="WhatsApp"
-                  class="h-8 w-8 object-contain"
-                  style="padding: 2px"
-                  draggable="false"
-                />
-              </div>
-
-              <div class="leading-tight">
-                <p class="text-sm font-extrabold text-slate-900 group-hover:text-slate-950 transition">
-                  Call Us
-                </p>
-                <span class="block text-sm font-semibold text-slate-600 group-hover:text-slate-900 transition">
-                  {{ phoneNumber }}
-                </span>
-              </div>
-            </a>
-
-            <!-- Location (ke Google Maps) -->
-            <a
-              :href="mapsUrl"
-              target="_blank"
-              rel="noopener"
-              class="flex items-start gap-3 group"
-              aria-label="Open Google Maps"
-            >
-              <div class="grid h-10 w-10 place-items-center rounded-full bg-white shrink-0">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6 text-slate-900"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.8"
-                    d="M12 21s7-6.5 7-11a7 7 0 10-14 0c0 4.5 7 11 7 11z"
-                  />
-                  <circle cx="12" cy="10" r="2.5" />
-                </svg>
-              </div>
-
-              <div class="leading-tight">
-                <p class="text-sm font-extrabold text-slate-900 group-hover:text-slate-950 transition">
-                  Our Location
-                </p>
-                <p class="text-sm font-semibold text-slate-600 whitespace-nowrap group-hover:text-slate-900 transition">
-                  {{ locationText }}
-                </p>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- ===== DESKTOP: NAV BAR (DARK) ===== -->
-    <div class="desktop-only bg-slate-900">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="flex h-14 items-center justify-between">
-          <nav class="flex items-center gap-10">
-            <button
-              v-for="link in links"
-              :key="link.id"
-              type="button"
-              @click="scrollTo(link.id)"
-              class="text-sm font-semibold text-white/90 hover:text-white transition-colors"
-            >
-              {{ link.label }}
-            </button>
-          </nav>
-
-          <button
-            type="button"
-            @click="emit('book')"
-            class="rounded-xl border border-white/40 px-10 py-2 text-sm font-extrabold text-white hover:border-white hover:bg-white/5 transition"
-          >
-            CONTACT
-          </button>
+    <div class="desktop-only bg-white-800">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <!-- Flex container utama -->
+    <div class="flex h-14 items-center justify-between w-full">
+      
+      <!-- Logo + Tulisan di kiri -->
+      <div class="flex items-center gap-2">
+        <div class="h-12 w-12 grid place-items-center overflow-hidden">
+          <img
+            :src="logoSrc"
+            alt="Bogor Mas Trans"
+            class="h-full w-full object-contain p-0.5"
+            loading="lazy"
+            @error="onLogoError"
+          />
         </div>
+        <p class="text-lg font-extrabold tracking-tight text-blue-950 whitespace-nowrap">
+          Bogor Mas Trans
+        </p>
       </div>
+
+      <!-- Navigasi di kanan -->
+      <nav class="flex items-center gap-10">
+        <button
+          v-for="link in links"
+          :key="link.id"
+          type="button"
+          @click="scrollTo(link.id)"
+          class="text-sm font-semibold text-gray-600 hover:text-gray-800 transition-colors"
+        >
+          {{ link.label }}
+        </button>
+      </nav>
+
     </div>
+  </div>
+</div>
 
     <!-- ===== MOBILE: SINGLE BAR (WHITE) ===== -->
     <div class="mobile-only border-b border-slate-200 bg-white">
@@ -152,7 +68,7 @@
             </div>
 
             <div class="leading-tight min-w-0">
-              <p class="text-[16px] font-extrabold tracking-tight text-slate-900 whitespace-nowrap truncate">
+              <p class="text-[16px] font-extrabold tracking-tight text-blue-950 whitespace-nowrap truncate">
                 Bogor Mas Trans
               </p>
             </div>
@@ -303,7 +219,7 @@
 
 <script setup>
 import { onBeforeUnmount, onMounted, computed, ref } from 'vue'
-import logoPng from '@/assets/bogormastrans.png'
+import logoPng from '@/assets/logo.png'
 
 const emit = defineEmits(['book'])
 
@@ -312,8 +228,8 @@ const scrolled = ref(false)
 
 const links = [
   { id: 'home', label: 'Home' },
-  { id: 'cars', label: 'Cars' },
   { id: 'about', label: 'About' },
+  { id: 'cars', label: 'Cars' },
   { id: 'contact', label: 'Contact' }
 ]
 
