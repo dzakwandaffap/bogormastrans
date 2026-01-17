@@ -617,7 +617,7 @@ async function fetchReviews() {
     activeIndex.value = 0
   } catch (e) {
     console.error(e)
-    reviewsError.value = 'Gagal memuat ulasan. Pastikan API /api/reviews berjalan dan CORS benar.'
+    reviewsError.value = 'Gagal memuat ulasan, silahkan coba lagi.'
   } finally {
     reviewsLoading.value = false
   }
@@ -660,7 +660,7 @@ async function submitReview() {
   } catch (e) {
     console.error(e)
     reviewError.value =
-      e?.response?.data?.message || 'Gagal mengirim ulasan. Cek API, validasi backend, dan CORS.'
+      e?.response?.data?.message || 'Gagal mengirim ulasan, silahkan coba lagi. Hubungin admin jika perlu.'
   } finally {
     reviewLoading.value = false
   }
